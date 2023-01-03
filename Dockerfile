@@ -11,3 +11,5 @@ RUN javac LibEnvMap.java && \
 FROM golang:1.19.4-bullseye
 
 COPY --from=builder /app/* .
+
+CMD go run main.go
