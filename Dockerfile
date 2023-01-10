@@ -2,11 +2,14 @@ FROM ghcr.io/graalvm/graalvm-ce:ol7-java17-22.3.0-b2 as builder
 
 RUN gu install native-image llvm-toolchain
 
-COPY . .
+COPY libs/*.jar *.java .
 
-RUN javac LibEnvMap.java && \
-	native-image -H:Name=libenvmap --shared && \
-	/opt/graalvm-ce-java17-22.3.0/lib/llvm/bin/clang -I ./ -L ./ -l envmap -Wl,-rpath ./ -o main main.c
+ENV JAVA_CP=".:pw-swift-core-SRU2021-9.2.11.jar:commons-lang3-3.12.0.jar:gson-2.8.9.jar"
+
+RUN javac MT103Parser.java -cp $JAVA_CP && \
+	native-image -H:Name=libmt103parser -cp $JAVA_CP --shared
+
+COPY . .
 
 FROM golang:1.19.4-bullseye
 
