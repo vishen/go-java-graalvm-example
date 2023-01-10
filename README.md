@@ -12,4 +12,3 @@ $ docker run -it go-java-example
 - https://www.graalvm.org/22.2/reference-manual/native-image/guides/build-native-shared-library/#run-a-demo
 - https://www.graalvm.org/sdk/javadoc/org/graalvm/nativeimage/c/type/CTypeConversion.html
 - https://www.graalvm.org/22.0/reference-manual/native-image/C-API/
-
